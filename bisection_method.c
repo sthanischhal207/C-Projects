@@ -46,10 +46,13 @@ void checking() {
 
 // Function to display the table header and current iteration values
 void table() {
-    printf("\n%.12f ", a);   // Print current 'a'
-    printf("%.12f ", b);     // Print current 'b'
-    printf("%.12f ", avg);   // Print current midpoint (avg)
-    printf("%.12f ", sum);   // Print f(avg)
+    printf("\n%.8f ", a);   // Print current 'a'
+    printf("     ");
+    printf("%.8f ", b);     // Print current 'b'
+    printf("     ");
+    printf("%.8f ", avg);   // Print current midpoint (avg)
+    printf("     ");
+    printf("%.8f ", sum);   // Print f(avg)
 }
 
 // Function to perform the bisection method for finding the root
