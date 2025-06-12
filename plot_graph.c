@@ -1,42 +1,63 @@
-// Function to print the graph
-void print_graph(int m, int n) {
-    // Loop through each row and column of the graph
-    for (int i = 0; i < m; i++) {
-        for (int j = 0; j < n; j++) {
-            printf("%c ", arr[i][j]); // Print each character with a space
+#include<stdio.h>
+#include <stdlib.h> // Required for abs()
+
+void print_graph(int m,int n);
+void initiate_graph(int m,int n);
+void user_update(int a,int b,int m, int n);
+
+char arr[1000][1000];
+
+int main(){
+    int choicex;
+    int choicey;
+    printf("Enter the X-coordinate you want to fill: ");
+    scanf("%d",&choicex);
+    printf("Enter the Y-coordinate you want to fill: ");
+    scanf("%d",&choicey);
+
+    int m = 2*abs(choicey) + 16;
+    int n = 2*abs(choicex) + 30;
+
+    initiate_graph(m,n);
+    user_update((int)(m/2)- choicey,(int)(n/2)+ choicex,m,n);
+    print_graph(m,n);
+
+    return 0;
+}
+
+
+void print_graph(int m,int n){
+    for(int i=0;i<m;i++){
+        for(int j=0;j<n;j++){
+            printf("%c ",arr[i][j]);
         }
-        printf("\n"); // Move to the next line after finishing a row
+        printf("\n");
     }
 }
 
-// Function to initialize the graph with axes
-void initiate_graph(int m, int n) {
-    int halfx = m / 2; // Middle row (Y-axis)
-    int halfy = n / 2; // Middle column (X-axis)
-
-    // Fill the graph with spaces and draw the axes
-    for (int i = 0; i < m; i++) {
-        for (int j = 0; j < n; j++) {
-            if (i == halfx) {
-                arr[i][j] = '-'; // Draw the X-axis
-            } else if (j == halfy) {
-                arr[i][j] = '|'; // Draw the Y-axis
-            } else {
-                arr[i][j] = ' '; // Fill the rest with spaces
+void initiate_graph(int m,int n){
+    int halfx= m/2;
+    int halfy= n/2;
+    for(int i=0;i<m;i++){
+        for(int j=0; j<n;j++){
+            if(i==halfx){
+                arr[i][j] = '-';
+            }
+            else if(j == halfy){
+                arr[i][j] = '|';
+            }
+            else{
+                arr[i][j] = ' ';
             }
         }
     }
 }
 
-// Function to update the graph with user input
-void user_update(int a, int b, int m, int n) {
-    char buffer[10]; // Buffer to store the string representation of the marker
-
-    // Create a string in the format "*(x,y)" for the marker
-    sprintf(buffer, "*(%d,%d)", b - (int)(n / 2), (int)(m / 2) - a);
-
-    // Place the marker on the graph starting at position (a, b)
+void user_update(int a,int b,int m, int n){
+    char buffer[10];
+    sprintf(buffer, "*(%d,%d)", b-(int)(n/2), (int)(m/2)-a);  // Fixed: Convert `a` and `b` to string properly
+    
     for (int i = 0; buffer[i] != '\0'; i++) {
-        arr[a][b + i] = buffer[i]; // Place each character of the marker in the graph
+        arr[a][b+i] = buffer[i];
     }
 }
